@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("RÃ¶relseinstÃ¤llningar")]
+    [Header("Rörelseinställningar")]
     public float acceleration = 20f;
     public float maxSpeed = 15f;
     public float brakeDecel = 25f;

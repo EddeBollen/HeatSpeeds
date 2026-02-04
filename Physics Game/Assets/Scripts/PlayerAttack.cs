@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("Attack Settings")]
     [SerializeField] private float activeTime = 0.5f;
-    [SerializeField] private float cooldown = 2f;
+    [SerializeField] private float cooldown = 1f;
     [SerializeField] private float heatDrainAmount = 0.5f;
 
     [Header("Debug")]
@@ -19,6 +19,8 @@ public class PlayerAttack : MonoBehaviour
     private CircleCollider2D circleCollider;
     private ShockwaveVisual shockwaveVisual;
 
+    private PlayerCameraController cam; // Shake
+
     private bool isActive;
     private float cooldownTimer;
 
@@ -27,14 +29,13 @@ public class PlayerAttack : MonoBehaviour
         heatBoost = GetComponentInParent<PlayerHeatBoost>();
         pointEffector = GetComponent<PointEffector2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+        cam = FindObjectOfType<PlayerCameraController>();
 
         // 🔥 AUTOMATISK KOPPLING – FUNKAR ÄVEN OM OBJEKTET ÄR INAKTIVT
         shockwaveVisual = GetComponentInChildren<ShockwaveVisual>(true);
 
         if (shockwaveVisual == null)
-        {
             Debug.LogError("ShockwaveVisual NOT FOUND in children!");
-        }
 
         pointEffector.enabled = false;
     }
@@ -49,28 +50,19 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("R PRESSED");
-
             if (!isActive && cooldownTimer <= 0f && heatBoost != null && heatBoost.heat >= 0.8f)
-            {
-                Debug.Log("Starting shockwave attack");
                 StartCoroutine(ActivateShockwave());
-            }
         }
     }
 
     private IEnumerator ActivateShockwave()
     {
-        Debug.Log("ActivateShockwave() CALLED");
-
         isActive = true;
         cooldownTimer = cooldown;
 
         // 🔥 VISUELL EFFEKT
         if (shockwaveVisual != null && heatBoost != null)
-        {
             shockwaveVisual.Play(heatBoost.heat);
-        }
 
         // ⚡ AKTIVERA ATTACK
         pointEffector.enabled = true;
@@ -83,9 +75,15 @@ public class PlayerAttack : MonoBehaviour
         List<GameObject> enemies = new List<GameObject>();
 
         foreach (Collider2D hit in hits)
-        {
             if (hit.CompareTag("Enemy"))
                 enemies.Add(hit.gameObject);
+
+        // ⚡ CAMERA SHAKE
+        if (cam != null)
+        {
+            // Vänta en kort stund så PS startar, men inte tillräckligt för att störa visual
+            yield return new WaitForSeconds(0.01f);
+            cam.TriggerShockwaveShake(intensity: 15f, duration: 0.5f);
         }
 
         yield return new WaitForSeconds(activeTime);
