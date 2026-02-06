@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("Attack Settings")]
     [SerializeField] private float activeTime = 0.5f;
     [SerializeField] private float cooldown = 1f;
-    [SerializeField] private float heatDrainAmount = 0.5f;
+    [SerializeField] private float heatDrainAmount = 0.3f;
 
     [Header("Debug")]
     [SerializeField, Range(0f, 1f)] private float currentHeat;
@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (!isActive && cooldownTimer <= 0f && heatBoost != null && heatBoost.heat >= 0.8f)
+            if (!isActive && cooldownTimer <= 0f && heatBoost != null && heatBoost.heat >= 0.6f)
                 StartCoroutine(ActivateShockwave());
         }
     }

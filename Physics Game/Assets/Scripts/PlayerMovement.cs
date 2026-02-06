@@ -1,9 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("R�relseinst�llningar")]
+    [Header("Rörelseinställningar")]
     public float acceleration = 20f;
     public float maxSpeed = 15f;
     public float brakeDecel = 25f;
@@ -13,9 +13,16 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public Rigidbody2D rb;
 
+    private PlayerCameraController cam;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        cam = FindObjectOfType<PlayerCameraController>();
     }
 
     private void FixedUpdate()
@@ -42,9 +49,24 @@ public class PlayerMovement : MonoBehaviour
             );
         }
 
-        // Rulla bollen
+        // Roll rotation
         float radius = GetComponent<CircleCollider2D>().radius * transform.localScale.x;
         float expectedAngular = -(rb.linearVelocity.x / (2 * Mathf.PI * radius)) * 360f;
         rb.angularVelocity = expectedAngular;
+    }
+
+    // ===== IMPACT SHAKE (JU HÅRDARE FALL → MER SHAKE) =====
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.collider.isTrigger && cam != null)
+        {
+            float impactForce = Mathf.Abs(rb.linearVelocity.y);
+
+            // Ignore små hopp
+            if (impactForce > 2f)
+            {
+                cam.TriggerImpactShake(impactForce);
+            }
+        }
     }
 }

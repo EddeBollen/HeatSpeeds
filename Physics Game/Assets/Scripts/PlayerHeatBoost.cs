@@ -4,9 +4,9 @@
 public class PlayerHeatBoost : MonoBehaviour
 {
     [Header("Värme / Boost-inställningar")]
-    [SerializeField] private float heatGainSpeed = 10f;     // Fart som krävs för att börja bygga värme
-    [SerializeField] private float heatIncreaseRate = 0.4f; // Hur snabbt värmen byggs upp
-    [SerializeField] private float heatDecreaseRate = 0.1f; // Hur snabbt den svalnar
+    [SerializeField] private float heatGainSpeed = 10f;
+    [SerializeField] private float heatIncreaseRate = 0.4f;
+    [SerializeField] private float heatDecreaseRate = 0.1f;
     [SerializeField] private float boostForce = 30f;
     [SerializeField] private float boostDuration = 1f;
     [SerializeField] private float boostCooldown = 3f;
@@ -25,9 +25,8 @@ public class PlayerHeatBoost : MonoBehaviour
     private float cooldownTimer = 0f;
     private int boostDir = 1;
     private bool isTouchingObject = false;
-    private bool grounded = false; // <- för markkontroll
+    private bool grounded = false;
 
-    // Kamera
     private PlayerCameraController cam;
 
     public bool IsBoosting => isBoosting;
@@ -44,7 +43,6 @@ public class PlayerHeatBoost : MonoBehaviour
     {
         float speed = Mathf.Abs(rb.linearVelocity.x);
 
-        // 🔥 Bygg värme endast om bollen rör ett objekt och går tillräckligt snabbt
         if (isTouchingObject && speed >= heatGainSpeed)
             heat += heatIncreaseRate * Time.fixedDeltaTime;
         else
@@ -52,7 +50,6 @@ public class PlayerHeatBoost : MonoBehaviour
 
         heat = Mathf.Clamp01(heat);
 
-        // 💨 Boost med Shift
         if (Input.GetKey(KeyCode.LeftShift) && heat >= 0.1f)
         {
             isBoosting = true;
@@ -67,36 +64,35 @@ public class PlayerHeatBoost : MonoBehaviour
             movement.maxSpeedMultiplier = 1f;
         }
 
-        // Färg efter heat
         Color heatColor = Color.Lerp(Color.white, new Color(1f, 0.3f, 0f), heat);
         sr.color = heatColor;
     }
 
     private void Update()
     {
-        // Hoppa
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             float jumpForce = Mathf.Lerp(minJump, maxJump, heat);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            heat = 0.1f;
-            grounded = false; // vi är i luften nu
+
+            // 🔥 ÄNDRAT HÄR
+            heat -= 0.2f;
+            heat = Mathf.Clamp01(heat);
+
+            grounded = false;
         }
     }
 
-    // ===== Kollisioner =====
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.collider.isTrigger)
         {
             isTouchingObject = true;
 
-            // Markkontakt
             if (collision.contacts[0].normal.y > 0.5f)
             {
                 grounded = true;
 
-                // ---- TRIGGA MARK-SHAKE ----
                 float impactForce = collision.relativeVelocity.magnitude;
                 if (cam != null && impactForce > 2f)
                     cam.TriggerImpactShake(impactForce);

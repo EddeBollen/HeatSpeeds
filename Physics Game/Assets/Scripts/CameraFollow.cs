@@ -9,27 +9,26 @@ public class PlayerCameraController : MonoBehaviour
     [Header("Zoom Settings")]
     public float baseZoom = 8f;
     public float maxZoomOut = 13f;
-    public float zoomSpeed = 4f;
+    public float zoomSpeed = 3f;
 
     [Header("Shake Settings")]
     public float boostShakeIntensity = 1.5f;
     public float boostShakeDuration = 0.25f;
 
-    public float impactShakeIntensity = 1f;
-    public float impactShakeMultiplier = 0.3f;
-    public float maxImpactShake = 5f;
+    public float impactShakeIntensity = 0.05f;
+    public float impactShakeMultiplier = 0.12f; // 🔥 skalar med fallhastighet
+    public float maxImpactShake = 20f;           // 🔥 max quake
 
     public float followLag = 0.2f;
 
-    // Interna
     private Rigidbody2D rb;
     private PlayerMovement movement;
 
-    private CinemachineCamera cineCam; // CM3
+    private CinemachineCamera cineCam;
     private CinemachineBasicMultiChannelPerlin noise;
 
     private float currentZoomVelocity;
-    private float shakeTimer = 0f;
+    private float shakeTimer;
     private Vector3 camOffsetVelocity;
 
     private void Awake()
@@ -40,35 +39,23 @@ public class PlayerCameraController : MonoBehaviour
             movement = target.GetComponent<PlayerMovement>();
         }
 
-        // Hitta CM3 kamera
         cineCam = FindObjectOfType<CinemachineCamera>();
         if (cineCam == null)
-        {
-            Debug.LogError("No CinemachineCamera found in scene!");
-            return;
-        }
+            Debug.LogError("No CinemachineCamera found!");
 
-        // Hämta noise extension
-        noise = cineCam.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
-        if (noise == null)
-        {
-            Debug.LogWarning("Add Basic Multi Channel Perlin to the CinemachineCamera!");
-        }
-
-        // Viktigt: se till att noise inte skakar hela tiden
-        if (noise != null)
-            noise.AmplitudeGain = 0f;
+        if (cineCam != null)
+            noise = cineCam.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
     }
 
     private void LateUpdate()
     {
         if (cineCam == null || target == null || rb == null) return;
 
-        // Smooth follow
+        // Follow
         Vector3 desiredPos = target.position;
         transform.position = Vector3.SmoothDamp(transform.position, desiredPos, ref camOffsetVelocity, followLag);
 
-        // Zoom baserat på hastighet
+        // Zoom baserat på speed
         float speed = Mathf.Abs(rb.linearVelocity.x);
         float speedFactor = Mathf.InverseLerp(0f, movement.maxSpeed * 1.5f, speed);
         float targetZoom = Mathf.Lerp(baseZoom, maxZoomOut, speedFactor);
@@ -80,46 +67,44 @@ public class PlayerCameraController : MonoBehaviour
             1f / zoomSpeed
         );
 
-        // Shake hantering
+        // Fade shake
         if (noise != null)
         {
             if (shakeTimer > 0f)
             {
                 shakeTimer -= Time.deltaTime;
-                if (shakeTimer <= 0f)
-                    noise.AmplitudeGain = 0f; // stop shake
+            }
+            else
+            {
+                noise.AmplitudeGain = 0f;
             }
         }
     }
 
-    // ===== Shake triggers =====
-
     // Boost shake
     public void TriggerBoostShake()
     {
-        if (noise == null) return;
-
         shakeTimer = boostShakeDuration;
-        noise.AmplitudeGain = boostShakeIntensity;
+        if (noise != null)
+            noise.AmplitudeGain = boostShakeIntensity;
     }
 
-    // Ground impact shake
+    // Impact shake (ju hårdare fall → mer shake)
     public void TriggerImpactShake(float impactForce)
     {
-        if (noise == null) return;
-
         float shake = impactShakeIntensity + impactForce * impactShakeMultiplier;
         shake = Mathf.Clamp(shake, 0f, maxImpactShake);
-        shakeTimer = 0.2f;
-        noise.AmplitudeGain = shake;
+
+        shakeTimer = 0.25f;
+        if (noise != null)
+            noise.AmplitudeGain = shake;
     }
 
-    // Shockwave shake
-    public void TriggerShockwaveShake(float intensity = 2.5f, float duration = 0.3f)
+    // Shockwave attack shake
+    public void TriggerShockwaveShake(float intensity = 0.5f, float duration = 0.1f)
     {
-        if (noise == null) return;
-
         shakeTimer = duration;
-        noise.AmplitudeGain = intensity;
+        if (noise != null)
+            noise.AmplitudeGain = intensity;
     }
 }
