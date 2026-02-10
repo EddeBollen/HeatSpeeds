@@ -2,20 +2,31 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float lifeTime = 3f;
+    public float speed = 8f;
+    public int damage = 1;
 
-    private void Start()
+    Rigidbody2D rb;
+
+    void Start()
     {
-        Destroy(gameObject, lifeTime);
+        rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = transform.right * speed; // Bullet flyger framåt
+        Destroy(gameObject, 5f); // dör efter 5 sek om den inte träffar player
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.collider.CompareTag("Player"))
+        // Kollar bara om det är Player
+        if (other.CompareTag("Player"))
         {
-            Destroy(collision.gameObject); // D�da spelaren
+            other.GetComponent<PlayerHealth>()?.TakeDamage(damage);
+            Destroy(gameObject); // Bullet försvinner direkt
+        }
+        if (other.CompareTag("Ground"))
+        {
+            Destroy(gameObject); // Bullet försvinner direkt
         }
 
-        Destroy(gameObject); // F�rst�r kulan oavsett
     }
+
 }

@@ -313,6 +313,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyGun
   bulletPrefab: {fileID: 1671407221174768701, guid: 38b7cc87d3f8fd341a2552ef6b449c30, type: 3}
   firePoint: {fileID: 8221905262933774200}
-  shootDistance: 5
+  shootDistance: 20
   fireRate: 1
-  bulletSpeed: 8
+  bulletSpeed: 12

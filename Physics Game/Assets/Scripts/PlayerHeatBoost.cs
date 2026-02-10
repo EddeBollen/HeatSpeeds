@@ -54,8 +54,8 @@ public class PlayerHeatBoost : MonoBehaviour
         {
             isBoosting = true;
             movement.moveAccelerationMultiplier = 2f;
-            movement.maxSpeedMultiplier = 1.5f;
-            heat -= 0.5f * Time.fixedDeltaTime;
+            movement.maxSpeedMultiplier = 2f;
+            heat -= 0.2f * Time.fixedDeltaTime;
         }
         else
         {
@@ -76,7 +76,7 @@ public class PlayerHeatBoost : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
             // 🔥 ÄNDRAT HÄR
-            heat -= 0.2f;
+            heat -= 0.1f;
             heat = Mathf.Clamp01(heat);
 
             grounded = false;

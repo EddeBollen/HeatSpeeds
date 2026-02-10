@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5240590179434384928}
   - component: {fileID: 3841171243158479946}
   - component: {fileID: 8628996558795304240}
+  - component: {fileID: 3818936569646806058}
   m_Layer: 0
   m_Name: Ceilingturret
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,10 +108,10 @@ MonoBehaviour:
   turretPivot: {fileID: 5125518585860942918}
   firePoint: {fileID: 3631531379046225370}
   bulletPrefab: {fileID: 1671407221174768701, guid: 38b7cc87d3f8fd341a2552ef6b449c30, type: 3}
-  shootDistance: 20
+  shootDistance: 35
   fireRate: 1
-  bulletSpeed: 45
-  detectRadius: 20
+  bulletSpeed: 65
+  detectRadius: 35
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -119,6 +120,42 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   alertColor: {r: 1, g: 0, b: 0, a: 1}
   alertLightDuration: 10
+--- !u!58 &3818936569646806058
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767379352044482767}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!1 &2208922713639159403
 GameObject:
   m_ObjectHideFlags: 0
