@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4248915899467587117}
   - component: {fileID: 3005704643137308825}
   - component: {fileID: 3672206172213463883}
+  - component: {fileID: 2693724170820627227}
+  - component: {fileID: -4849036790216153061}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -30,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -9.1, y: -0.06105, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4663224971661311816}
@@ -61,7 +63,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: ef4478c559543f0459c33ffaf3ebb662, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,9 +85,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_FlipX: 0
+  m_Sprite: {fileID: 6553765127979644372, guid: 77925d2f15958a249b5d111bd9f38d20, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -155,17 +157,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.016418457, y: -0.016416311}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 6.02, y: 6.02}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.0891113, y: 6.0890927}
   m_EdgeRadius: 0
 --- !u!114 &3672206172213463883
 MonoBehaviour:
@@ -194,6 +196,37 @@ MonoBehaviour:
   alertColor: {r: 1, g: 0, b: 0, a: 1}
   alertLightDuration: 10
   isAlert: 0
+  firePoint: {fileID: 0}
+--- !u!114 &2693724170820627227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018200534472666592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f1cc7551756e741bbb5fcbf1725293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHP: 2
+--- !u!114 &-4849036790216153061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018200534472666592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 368df9c7b201b5c41ae7c947d5704a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShaderDamageFlash
+  blendProperty: _Blend
+  opacityProperty: _Opacity
+  flashBlendValue: 5
+  flashOpacityValue: 5
+  flashTime: 0.3
 --- !u!1001 &4296983173039405944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -207,12 +240,24 @@ PrefabInstance:
       value: Gun
       objectReference: {fileID: 0}
     - target: {fileID: 8869532746742121520, guid: 13433c81a31e8a84c9d35f31386f6593, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869532746742121520, guid: 13433c81a31e8a84c9d35f31386f6593, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869532746742121520, guid: 13433c81a31e8a84c9d35f31386f6593, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.34003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869532746742121520, guid: 13433c81a31e8a84c9d35f31386f6593, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.7772722
+      value: -4.25
       objectReference: {fileID: 0}
     - target: {fileID: 8869532746742121520, guid: 13433c81a31e8a84c9d35f31386f6593, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 8869532746742121520, guid: 13433c81a31e8a84c9d35f31386f6593, type: 3}
       propertyPath: m_LocalPosition.z

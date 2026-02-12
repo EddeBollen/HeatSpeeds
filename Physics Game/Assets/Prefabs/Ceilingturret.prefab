@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3841171243158479946}
   - component: {fileID: 8628996558795304240}
   - component: {fileID: 3818936569646806058}
+  - component: {fileID: -4034795022713078760}
+  - component: {fileID: 6524209378793185968}
   m_Layer: 0
   m_Name: Ceilingturret
   m_TagString: Enemy
@@ -29,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2, y: 9.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5125518585860942918}
@@ -60,7 +62,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: ef4478c559543f0459c33ffaf3ebb662, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CeilingTurretAlert
   turretPivot: {fileID: 5125518585860942918}
   firePoint: {fileID: 3631531379046225370}
-  bulletPrefab: {fileID: 1671407221174768701, guid: 38b7cc87d3f8fd341a2552ef6b449c30, type: 3}
+  bulletPrefab: {fileID: 1671407221174768701, guid: 7e70100cf7e9d274f9e0971bca4aa971, type: 3}
   shootDistance: 35
   fireRate: 1
   bulletSpeed: 65
@@ -156,6 +158,36 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &-4034795022713078760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767379352044482767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f1cc7551756e741bbb5fcbf1725293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHP: 2
+--- !u!114 &6524209378793185968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767379352044482767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 368df9c7b201b5c41ae7c947d5704a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShaderDamageFlash
+  blendProperty: _Blend
+  opacityProperty: _Opacity
+  flashBlendValue: 5
+  flashOpacityValue: 5
+  flashTime: 0.3
 --- !u!1 &2208922713639159403
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 4953740344886266938}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.47, z: 0}
+  m_LocalPosition: {x: 0.08, y: 1.61, z: 0}
   m_LocalScale: {x: 0.27225, y: 1.0718842, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -247,7 +279,7 @@ Transform:
   m_GameObject: {fileID: 6051319942076095348}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 1.24, z: 0}
+  m_LocalPosition: {x: 0.03, y: 1.37, z: 0}
   m_LocalScale: {x: 0.27225, y: 1.0718842, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

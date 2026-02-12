@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7349050182370501938}
   - component: {fileID: 8289965479587486996}
   - component: {fileID: 8570856899039164457}
+  - component: {fileID: -34656627762147907}
+  - component: {fileID: -4808525561693052096}
   m_Layer: 8
   m_Name: Sniper
   m_TagString: Enemy
@@ -30,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -143.01648, y: -210.29997, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3614051900084108672}
@@ -61,7 +63,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: ef4478c559543f0459c33ffaf3ebb662, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,8 +85,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 6553765127979644372, guid: 77925d2f15958a249b5d111bd9f38d20, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -155,17 +157,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.014831543, y: 0.044456482}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 6.02, y: 6.02}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.186157, y: 6.0676117}
   m_EdgeRadius: 0
 --- !u!114 &8570856899039164457
 MonoBehaviour:
@@ -194,6 +196,37 @@ MonoBehaviour:
   alertColor: {r: 1, g: 0, b: 0, a: 1}
   alertLightDuration: 10
   isAlert: 0
+  firePoint: {fileID: 0}
+--- !u!114 &-34656627762147907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801993887799590348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f1cc7551756e741bbb5fcbf1725293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHP: 2
+--- !u!114 &-4808525561693052096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6801993887799590348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 368df9c7b201b5c41ae7c947d5704a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShaderDamageFlash
+  blendProperty: _Blend
+  opacityProperty: _Opacity
+  flashBlendValue: 5
+  flashOpacityValue: 5
+  flashTime: 0.3
 --- !u!1001 &8835464396898628512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -256,11 +289,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5240590179434384928, guid: 9b325cba9b34eb543937b772ce9c91f3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5240590179434384928, guid: 9b325cba9b34eb543937b772ce9c91f3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5240590179434384928, guid: 9b325cba9b34eb543937b772ce9c91f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -310,6 +343,10 @@ PrefabInstance:
       propertyPath: bulletSpeed
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8628996558795304240, guid: 9b325cba9b34eb543937b772ce9c91f3, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 1671407221174768701, guid: 38b7cc87d3f8fd341a2552ef6b449c30, type: 3}
     - target: {fileID: 8628996558795304240, guid: 9b325cba9b34eb543937b772ce9c91f3, type: 3}
       propertyPath: detectRadius
       value: 50

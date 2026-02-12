@@ -19,7 +19,7 @@ public class PlayerAttack : MonoBehaviour
     private CircleCollider2D circleCollider;
     private ShockwaveVisual shockwaveVisual;
 
-    private PlayerCameraController cam; // Shake
+    private PlayerCameraController cam;
 
     private bool isActive;
     private float cooldownTimer;
@@ -31,7 +31,6 @@ public class PlayerAttack : MonoBehaviour
         circleCollider = GetComponent<CircleCollider2D>();
         cam = FindObjectOfType<PlayerCameraController>();
 
-        // 🔥 AUTOMATISK KOPPLING – FUNKAR ÄVEN OM OBJEKTET ÄR INAKTIVT
         shockwaveVisual = GetComponentInChildren<ShockwaveVisual>(true);
 
         if (shockwaveVisual == null)
@@ -60,17 +59,14 @@ public class PlayerAttack : MonoBehaviour
         isActive = true;
         cooldownTimer = cooldown;
 
-        // 🔥 VISUELL EFFEKT
         if (shockwaveVisual != null && heatBoost != null)
             shockwaveVisual.Play(heatBoost.heat);
 
-        // ⚡ AKTIVERA ATTACK
         pointEffector.enabled = true;
 
         if (heatBoost != null)
             heatBoost.heat = Mathf.Clamp01(heatBoost.heat - heatDrainAmount);
 
-        // 🎯 HIT DETECTION
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, circleCollider.radius);
         List<GameObject> enemies = new List<GameObject>();
 
@@ -78,27 +74,23 @@ public class PlayerAttack : MonoBehaviour
             if (hit.CompareTag("Enemy"))
                 enemies.Add(hit.gameObject);
 
-        // ⚡ CAMERA SHAKE
         if (cam != null)
         {
-            // Vänta en kort stund så PS startar, men inte tillräckligt för att störa visual
             yield return new WaitForSeconds(0.01f);
             cam.TriggerShockwaveShake(intensity: 15f, duration: 0.5f);
+        }
+
+        // ✅ DAMAGE ISTÄLLET FÖR DESTROY
+        foreach (GameObject enemy in enemies)
+        {
+            EnemyHealth hp = enemy.GetComponent<EnemyHealth>();
+            if (hp != null)
+                hp.TakeDamage(1);
         }
 
         yield return new WaitForSeconds(activeTime);
 
         pointEffector.enabled = false;
         isActive = false;
-
-        foreach (GameObject enemy in enemies)
-            StartCoroutine(DestroyAfterDelay(enemy, 0.1f));
-    }
-
-    private IEnumerator DestroyAfterDelay(GameObject obj, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (obj != null)
-            Destroy(obj);
     }
 }

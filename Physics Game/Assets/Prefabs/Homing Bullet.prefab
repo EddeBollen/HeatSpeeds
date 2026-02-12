@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 1671407221174768701}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.3553, y: 1.9845, z: 0}
-  m_LocalScale: {x: 0.68, y: 0.14, z: 1}
+  m_LocalPosition: {x: -5.3542, y: 1.9839, z: 0}
+  m_LocalScale: {x: 1.3710533, y: 0.28227568, z: 2.016255}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 3f2a3917b74ac624aa63447ddc0f446e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,9 +154,9 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.0000002, y: 2.0000005}
-  m_Direction: 0
+  m_Offset: {x: -0.005825645, y: 0.018901743}
+  m_Size: {x: 1.0427336, y: 2.026947}
+  m_Direction: 1
 --- !u!114 &-1189831028909465233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,8 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomingBullet
   startSpeed: 1.5
-  maxSpeed: 30
-  acceleration: 30
-  turnSpeed: 250
+  maxSpeed: 50
+  acceleration: 100
+  turnSpeed: 300
   damage: 1
   homingDuration: 1.5
