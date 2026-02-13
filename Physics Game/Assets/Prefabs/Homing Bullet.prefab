@@ -173,5 +173,5 @@ MonoBehaviour:
   maxSpeed: 50
   acceleration: 100
   turnSpeed: 300
-  damage: 1
+  damage: 2
   homingDuration: 1.5

@@ -933,6 +933,10 @@ PrefabInstance:
       value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 8628996558795304240, guid: 9b325cba9b34eb543937b772ce9c91f3, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 1671407221174768701, guid: 38b7cc87d3f8fd341a2552ef6b449c30, type: 3}
+    - target: {fileID: 8628996558795304240, guid: 9b325cba9b34eb543937b772ce9c91f3, type: 3}
       propertyPath: shootDistance
       value: 50
       objectReference: {fileID: 0}
@@ -1026,6 +1030,10 @@ PrefabInstance:
       propertyPath: bulletSpeed
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 8628996558795304240, guid: 9b325cba9b34eb543937b772ce9c91f3, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 1671407221174768701, guid: 38b7cc87d3f8fd341a2552ef6b449c30, type: 3}
     - target: {fileID: 8628996558795304240, guid: 9b325cba9b34eb543937b772ce9c91f3, type: 3}
       propertyPath: shootDistance
       value: 50

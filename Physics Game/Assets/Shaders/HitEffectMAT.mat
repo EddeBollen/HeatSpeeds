@@ -61,7 +61,7 @@ Material:
     - _FlashAmount: 0
     - _Opacity: 0
     m_Colors:
-    - _Blend: {r: 1024, g: 1024, b: 1024, a: 1}
+    - _Blend: {r: 1573.2888, g: 1573.2888, b: 1573.2888, a: 1}
     - _FlashColor: {r: 766.99615, g: 766.99615, b: 766.99615, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

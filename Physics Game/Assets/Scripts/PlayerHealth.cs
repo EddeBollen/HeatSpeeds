@@ -4,6 +4,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 5;
     private int currentHealth;
+    private bool isInvincible = false;
 
     private ShaderDamageFlash flash;
 
@@ -14,13 +15,27 @@ public class PlayerHealth : MonoBehaviour
         if (flash == null)
             Debug.LogWarning("ShaderDamageFlash missing on Player");
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            isInvincible = !isInvincible; // Växla true/false
+            Debug.Log("Invincible: " + isInvincible);
+        }
+    }
 
     public void TakeDamage(int damage)
     {
+
+        if (isInvincible)
+        {
+            Debug.Log("Player is invincible!");
+            return; // Stoppar funktionen här
+        }
+
         currentHealth -= damage;
         Debug.Log("PLAYER TOOK DAMAGE! HP = " + currentHealth);
 
-        // Trigger flash
         if (flash != null)
             flash.Flash();
 
@@ -31,6 +46,6 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("PLAYER DIED");
-        Destroy(gameObject);
+        Destroy(gameObject, 0.3f);
     }
 }
